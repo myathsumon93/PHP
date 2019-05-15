@@ -19,7 +19,7 @@ print "Sorting with value : <br>";
 print "<table>\n";
 print "<tr><td> Location </td><td> Populations </td><tr>\n";
 foreach ( $city as $key => $value ) {
-        print "<tr><td> $key </td> <td> " . number_format($value) . " </td></tr>\n";
+	print "<tr><td> $key </td> <td> " . number_format($value) . " </td></tr>\n";
 }
 print "<tr><td> Total </td><td> " . number_format( $total ) . " </td></tr>\n";
 print "</table>";
@@ -30,7 +30,7 @@ print "Sorting with key : <br>";
 print "<table>\n";
 print "<tr><td> Location </td><td> Populations </td><tr>\n";
 foreach ( $city as $key => $value ) {
-        print "<tr><td> $key </td> <td> " . number_format( $value ) . " </td></tr>\n";
+	print "<tr><td> $key </td> <td> " . number_format( $value ) . " </td></tr>\n";
 }
 print "<tr><td> Total </td><td> " . number_format( $total ) . " </td></tr>\n";
 print "</table>";
