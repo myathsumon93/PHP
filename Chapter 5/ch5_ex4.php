@@ -15,13 +15,13 @@ print wcolor( 0, 255, 255 );
 * @return hexa number
 */
 function wcolor1( $red, $green, $blue ) {
-$hex = [ dechex( $red ), dechex( $green ), dechex( $blue ) ];
-foreach ( $hex as $i => $val ) {
-	if ( strlen( $i ) == 1 ) {
-		$hex[ $i ] = "0$val";
+	$hex = [ dechex( $red ), dechex( $green ), dechex( $blue ) ];
+	foreach ( $hex as $i => $val ) {
+		if ( strlen( $i ) == 1 ) {
+			$hex[ $i ] = "0$val";
+		}
 	}
-}
-return '#' . implode( '', $hex );
+	return '#' . implode( '', $hex );
 }
 print wcolor( 255, 244, 225 );
 ?>

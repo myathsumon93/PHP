@@ -1,20 +1,15 @@
 <?php
 /**
 * Creating mini web page with bgcolor, title and header
-* @param string $color
-* @param string $title
-* @param string $header
+* @param string $color, $title, $header
 */
 function page_header( $color = '336699', $title = 'the page', $header = 'Welcome' ) {
 	print '<html><head><title> Welcome to ' . $title . '</title></head>';
 	print '<body bgcolor="#' . $color . '">';
-	print "<h1>$header</h1>";
+	print '<h1>$header</h1>';
 }
-//page_header();
-//page_header( '445577' );
-//page_header( ' 88aaff', 'Home Page' );
+
 page_header ( 'fa9900', 'Testing Page', 'Suprise!!!!' ); 
-//page_header( '66cc99', 'Home', 'Welcome to function testing Page' );
 print "\n";
 
 /**
@@ -50,7 +45,7 @@ $meal = 200;
 $tax = 10;
 $tap = 8;
 $total = r_check( $meal, $tax, $tap );
-print "<br>price is $total[0]\n";
+print '<br>price is $total[0]\n';
 if ( $total[0] > 200 ) {
 	print 'pay by credit card';
 	print '<br>';
@@ -74,7 +69,7 @@ function payment_method( $cash_on_hand, $amount ) {
 	return 'cash';
 	}
 }
-$method = payment_method(200, $total );
+$method = payment_method( 200, $total );
 print 'I\'ll pay with ' . $method . '<br>';
 if ( r_check( 1500, 8.25, 15 ) < 200 ) {
 	print 'Less than $20, I can pay cash.';
@@ -84,10 +79,7 @@ if ( r_check( 1500, 8.25, 15 ) < 200 ) {
 
 /**
 * Payment calculation and chosing payment way
-* @param int $meal
-* @param int $tax
-* @param int $tip
-* @param int $cash_on_hand
+* @param int $meal, $tax, $tip, $cash_on_hand
 * @return boolean
 */
 function complete_bill( $meal, $tax, $tip, $cash_on_hand ) {
@@ -112,6 +104,7 @@ $dinner = 'Curry Cuttlefish';
 
 /**
 * Declaring global value in function
+* @param global variable dinner
 */
 function vegetarian_dinner() {
 	print "Dinner is " . $GLOBALS['dinner'] . ", or ";
@@ -121,17 +114,18 @@ function vegetarian_dinner() {
 
 /**
 * Declaring global value in function
+* @param global variable dinner
 */
 function kosher_dinner() {
 	global $dinner;
-	print "Dinner is $dinner, or ";
+	print 'Dinner is $dinner, or ';
 	$dinner = 'Kung Pao Chicken';
 	print $dinner;
 	print "\n";
 }
-print "Vegetarian : <br>"; 
+print 'Vegetarian : <br>'; 
 vegetarian_dinner();
 print "Kosher : <br>";
 kosher_dinner();
-print "<br>Regular dinner is $dinner";
+print '<br>Regular dinner is $dinner';
 ?>
