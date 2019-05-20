@@ -1,0 +1,97 @@
+<?php
+//remove comment like //print html_img( 'flower.jpeg' );
+//remove unnecessary space for all files like ; and { 
+//write comment fro parameter and return type and function deftinatin
+// glogal variable comment eg.  * @global array $dacana_csv_data
+//PHP file use ''
+
+//ch5_ex1.php
+/**
+*Returning HTML image tag
+* @param string $url, $alt, $height, $width
+* @return htmltag $html
+*/
+function html_img( $url, $alt = null, $height = null, $width = null ) {
+	$html = '<img src = "' . $url . '"';
+	if ( isset( $alt ) ) {
+		$html .= ' alt="' . $alt . '"';
+	}
+	if ( isset( $height ) ) {
+		$html .= ' height="' . $height . '"';
+	}
+	if ( isset( $width ) ) {
+		$html .= ' width="' . $width . '"';
+	}
+	$html .= '/>';
+	return $html;
+}
+print html_img( 'flower.jpeg', null, 400, 300 );
+
+//ch5_ex2.php
+/**
+* Using global file path
+* @param string $url, $alt, $height, $width
+* @return htmltag $html
+*/
+function html_img( $file, $alt = null, $height = null, $width = null ) {
+	if ( isset( $GLOBALS['image_path'] ) ) {
+		$file = $GLOBALS['image_path'] . $file;
+	}
+	$html = '<img src = "' . $file . '"';
+	if ( isset( $alt ) ) {
+		$html .= ' alt="' . $alt . '"';
+	}
+	if ( isset( $height ) ) {
+		$html .= ' height="' . $height . '"';
+}
+	if ( isset( $width ) ) {
+		$html .= ' width="' . $width . '"';
+	}
+	$html .= '/>';
+	return $html;
+}
+print html_img( 'flower.jpeg', null, 400, 300 );
+
+//ch5_ex4.php
+/**
+* Changing color code from decimal to hexadecimal formal
+* @param int $red, $green, $blue
+* @return hexa number
+*/
+function wcolor1( $red, $green, $blue ) {
+	$hex = [ dechex( $red ), dechex( $green ), dechex( $blue ) ];
+	foreach ( $hex as $i => $val ) {
+		if ( strlen( $i ) == 1 ) {
+			$hex[ $i ] = '0$val';
+		}
+	}
+	return '#' . implode( '', $hex );
+}
+print wcolor( 255, 244, 225 );
+
+//ch5_t1.php1
+
+print '<br>price is $total[0]\n';
+if ( $total[0] > 200 ) {
+	print 'pay by credit card';
+	print '<br>';
+} else {
+	print 'pay by cash';
+	print '<br>';
+}
+
+$method = payment_method(200, $total );
+print 'I\'ll pay with ' . $method . '<br>';
+if ( r_check( 1500, 8.25, 15 ) < 200 ) {
+	print 'Less than $20, I can pay cash.';
+} else {
+	print 'Too expensive, I need my credit card.';
+}
+
+function vegetarian_dinner() {
+	print 'Dinner is ' . $GLOBALS['dinner'] . ', or ';
+	$dinner = 'Sauteed Pea Shoots';
+	print $dinner;
+	print '\n';
+}
+?>
