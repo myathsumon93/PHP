@@ -1,0 +1,33 @@
+need space
+return in_array( $ingredient, $this->ingredients);
+return array('small', 'medium', 'large');
+$sandwich->ingredients = array( 'chicken', 'bread');
+if( $soup->hasIngredient( $ing) ) {
+
+use '' instesd of ""
+print "Soup contains $ing.<br>";
+print "size is " . implode( ',', $size );
+print " $ing is contained in combo set.<br>";
+
+
+change this text 
+throw new Exception( '$ingredients must be an array' );
+
+to
+
+throw new Exception( $ingredients . 'must be an array' );
+
+add new line at the end ot php file  ?>
+
+wrong comment format
+
+/**
+ * Constuctor
+ * @param string $name
+ * @param int $cost
+ */
+
+/**
+ * Constuctor
+ * @param string $name, int $cost
+ */
