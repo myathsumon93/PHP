@@ -9,8 +9,8 @@ class fruit {
 	 * @param string $bite
 	 */
 	public static function munch( $bite ) {
-		print "here is a tiny munch of " . $bite ;
-		print "<br>";
+		print 'here is a tiny munch of ' . $bite ;
+		print '<br>';
 	}
 }
 ?>

@@ -8,12 +8,11 @@ class Entree {
 
 	/**
 	 * Constructor
-	 * @param string $name;
-	 * @param array $ingredients
+	 * @param string $name, array $ingredients
 	 */
 	public function __construct( $name, $ingredients ) {
 		if ( ! is_array( $ingredients ) ) {
-			throw new Exception( '$ingredients must be an array' );
+			throw new Exception( $ingredients ' must be an array' );
 		}
 		$this->name = $name;
 		$this->ingredients = $ingredients;
@@ -38,12 +37,12 @@ class Entree {
 }
 
 try {
-	$soup = new Entree( 'Chicken soup', 'water');
+	$soup = new Entree( 'Chicken soup', 'water' );
 	if ($soup->hasIngredient( 'milk' ) ){
 		print 'yummy!!!';
 	}
 } catch ( Exception $e ) {
-	print "Could not create the meal : " . $e->getMessage();
+	print 'Could not create the meal : ' . $e->getMessage();
 }
 $sandwich = new Entree( 'Chicken sandwich', array( 'chicken', 'bread' ) );
 ?>

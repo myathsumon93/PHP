@@ -5,12 +5,11 @@ class Entree {
 
 	/**
 	 * Constructor
-	 * @param string $name;
-	 * @param array $ingredients
+	 * @param string $name, array $ingredients
 	 */
 	public function __construct( $name, $ingredients ) {
 		if ( ! is_array( $ingredients ) ) {
-			throw new Exception( '$ingredients must be an array' );
+			throw new Exception( $ingredients . ' must be an array' );
 		}
 		$this->name = $name;
 		$this->ingredients = $ingredients;
@@ -22,7 +21,7 @@ class Entree {
 	 * @return boolean
 	 */
 	public function hasIngredient( $ingredient ) {
-		return in_array( $ingredient, $this->ingredients);
+		return in_array( $ingredient, $this->ingredients );
 	}
 }
 
@@ -34,7 +33,7 @@ class ComboMeal extends Entree {
 		parent::__construct( $name, $entrees );
 		foreach ( $entrees as $entree ) {
 			if ( ! $entree instanceof Entree ) {
-				throw new Exception( 'Elements of $entrees must be Entree objects' );
+				throw new Exception( 'Elements of' . $entrees . ' must be Entree objects' );
 			}
 		}
 }
@@ -52,8 +51,7 @@ $sandwich = new Entree( 'Chicken sandwich', array( 'chicken', 'bread' ) );
 $combo = new comboMeal( 'Soup + Sandwich', array( $soup, $sandwich ) );
 foreach ( ['chicken', 'water', 'ppickles'] as $ing ) {
 	if ( $combo->hasIngredient( $ing ) ) {
-		print " $ing is contained in combo set.<br>";
+		print $ing . ' is contained in combo set.<br>';
 	}
 }
 ?>
-

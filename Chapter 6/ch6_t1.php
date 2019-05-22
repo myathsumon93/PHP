@@ -1,7 +1,7 @@
 <?php
 /**
-	 * define a class and static method
-	 */
+ * define a class and static method
+ */
 class Entree {
 	public $name;
 	public $ingredients = array();
@@ -12,14 +12,14 @@ class Entree {
 	 * @return boolean
 	 */
 	public function hasIngredient( $ingredient ) {
-		return in_array( $ingredient, $this->ingredients);
+		return in_array( $ingredient, $this->ingredients );
 	}
 	/**
 	 * Create static function
 	 * @return array
 	 */
 	public static function getSizes() {
-		return array('small', 'medium', 'large');
+		return array( 'small', 'medium', 'large' );
 	}
 }
 $soup = new Entree;
@@ -27,15 +27,15 @@ $soup->name = 'Chicken soup';
 $soup->ingredients = array( 'chicken', 'water' );
 $sandwich = new Entree;
 $sandwich->name = 'Chicken sandwich';
-$sandwich->ingredients = array( 'chicken', 'bread');
+$sandwich->ingredients = array( 'chicken', 'bread' );
 foreach ( ['chicken', 'lemon', 'bread', 'water'] as $ing ) {
 	if( $soup->hasIngredient( $ing) ) {
-		print "Soup contains $ing.<br>";
+		print 'Soup contains ' . $ing;
 	}
 	if( $sandwich->hasIngredient( $ing ) ) {
-		print "Sandwich contains $ing. <br>";
+		print 'Sandwich contains' . $ing . '<br>';
 	}
 }
 $size = Entree::getSizes();
-print "size is " . implode( ',', $size );
+print 'size is ' . implode( ',', $size );
 ?>

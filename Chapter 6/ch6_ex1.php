@@ -8,8 +8,7 @@ class Ingredient {
 
 	/**
 	 * Constuctor
-	 * @param string $name
-	 * @param int $cost
+	 * @param string $name, int $cost
 	 */
 	public function __construct( $name, $cost ) {
 		$this->name = $name;

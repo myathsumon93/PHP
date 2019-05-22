@@ -7,14 +7,13 @@ class PricedEntree extends Entree {
 
 	/**
 	 * Constuctor
-	 * @param string $name
-	 * @param array $ingredients
+	 * @param string $name, array $ingredients
 	 */
 	public function __construct( $name, $ingredients ) {
 		parent::__construct( $name, $ingredients );
 		foreach ( $this->ingredients as $ingredient ) {
 			if ( ! $ingredient instanceof Ingredient ) {
-				throw new Exception( 'Elements of $ingredients must be Ingredient object' );
+				throw new Exception( 'Elements of' . $ingredients . 'must be Ingredient object' );
 			}
 		}
 	}
