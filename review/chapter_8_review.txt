@@ -1,0 +1,41 @@
+Php use ''
+//ch8_t1.php
+print 'You ate a {$_COOKIE['flavor']} cookie.';
+print '$cookie_name = $cookie_value <br/>';
+
+//ch8_t2.php
+$vars = array( 
+	'name' => 'Oscar the Grouch',
+	'color' => 'green',
+	'favorite_punctuation' => '#'
+);
+
+print $query_string . '<br>';
+print $url . '<br>';
+
+//ch8_t3.php
+http_response_code( 401 );
+echo 'You need to enter a valid username and password.';
+
+//ch8_t4.php
+<form method="POST" action="<?php echo $_SERVER['PHP_SELF'];?>">
+if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
+	$secret_word = 'if i ate spinach';
+
+//ch8_t5.php
+if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
+	$name = $_REQUEST['fname'];
+	if ( empty( $name ) ) {
+		echo 'Name is empty';
+	} else {
+		echo $name;
+	}
+}
+
+//ch8_t5.php
+header( 'Location: https://www.tutorialspoint.com/'' );
+header( 'HTTP/1.0 404 Not Found' );
+
+//ch8_t1.php
+header( 'refresh:5;url=ch8_t5.php' );
+echo 'You\'ll be redirected in about 5 secs. If not, click <a href="ch8_t5.php"> here </a>.';
