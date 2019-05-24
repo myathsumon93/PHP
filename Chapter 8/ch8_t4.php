@@ -19,8 +19,7 @@ function validate( $user, $pass ) {
 			return false;
 		}
 	}
-if ( $_SERVER["REQUEST_METHOD"] == "POST" ) {
-
+if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
 	$secret_word = 'if i ate spinach';
 	if ( validate( $_POST['username'], $_POST['password'] ) ) {
 		$_SESSION['login'] = $_POST['username'] . ',' . md5( $_POST['username'] . $secret_word);

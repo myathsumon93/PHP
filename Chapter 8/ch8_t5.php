@@ -27,10 +27,10 @@ print getenv( 'HOME' );
 </form>
 
 <?php
-if ( $_SERVER["REQUEST_METHOD"] == "POST" ) {
+if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
 	$name = $_REQUEST['fname'];
 	if ( empty( $name ) ) {
-		echo "Name is empty";
+		echo 'Name is empty';
 	} else {
 		echo $name;
 	}
