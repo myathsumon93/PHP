@@ -37,6 +37,7 @@
 /**
  * Validating a credit card number
  * @param string $s
+ * @return int sum
  */
 function is_valid_credit_card($s) {
 	$s = strrev(preg_replace( '/[^\d]/', '', $s ) );
@@ -46,7 +47,7 @@ function is_valid_credit_card($s) {
 		$val = $s[ $i ];
 	} else {
 		$val = $s[ $i ] * 2;
-		if( $val >9 ){
+		if( $val > 9 ){
 			$val -= 9;
 		}
 	}
@@ -54,12 +55,12 @@ function is_valid_credit_card($s) {
 	}
 return ( ( $sum % 10 ) == 0 );
 }
-if ( $_SERVER["REQUEST_METHOD"] == "POST" ) {
+if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
 	echo $_POST['name'] . '<br>';
 	echo $_POST['email'] . '<br>';
 	echo $_POST['age'] . '<br>';
 	echo $_POST['comment'] . '<br>';
-	if ( ! ( filter_has_var( INPUT_POST, 'name' )  && (strlen ( filter_input(INPUT_POST, 'name' ) ) > 0 ) ) ) {
+	if ( ! ( filter_has_var( INPUT_POST, 'name' )  && ( strlen ( filter_input(INPUT_POST, 'name' ) ) > 0 ) ) ) {
 		echo 'You must enter your name.<br>';
 	}
 	if ( filter_input ( INPUT_POST, 'email', FILTER_VALIDATE_EMAIL ) === false ) {

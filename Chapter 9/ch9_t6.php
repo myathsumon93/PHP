@@ -10,7 +10,7 @@ foreach ( $flavors as $flavor ) {
 }
 if ( $_SERVER['REQUEST_METHOD'] == 'GET' ) {
 	$errors = array();
-include __DIR__ . '/ch9_form.php';
+	include __DIR__ . '/ch9_form.php';
 } else {
 	$errors = validate_form();
 	if ( count( $errors ) ) {
@@ -18,11 +18,11 @@ include __DIR__ . '/ch9_form.php';
 			$defaults['name'] = $_POST['name'];
 		}
 		if ( isset( $_POST['age'] ) ) {
-			$defaults['age'] = "checked='checked'";
+			$defaults['age'] = 'checked='"checked"';
 		}
 		foreach ( $flavors as $flavor ) {
 			if ( isset( $_POST['flavor'] ) && ( $_POST['flavor'] == $flavor ) ) {
-				$defaults['flavor'][$flavor] = "selected='selected'";
+				$defaults['flavor'][$flavor] = 'selected="selected"';
 			}
 		}
 		include __DIR__ . '/ch9_form.php';

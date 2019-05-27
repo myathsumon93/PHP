@@ -3,8 +3,9 @@
 	<input type="file" name="document"/>
 	<input type="submit" value="Send File"/>
 </form>
-<?php } else {
-	if (isset( $_FILES['doucment'] ) && ( $_FILES['document']['error'] == UPLOAD_ERR_OK ) ) {
+<?php
+} else {
+	if ( isset( $_FILES['doucment'] ) && ( $_FILES['document']['error'] == UPLOAD_ERR_OK ) ) {
 		$newPath = '/tmp/' . basename( $_FILES['doucment']['name'] );
 		if( move_uploaded_file( $_FILES['document']['tmp_name'], $newPath ) ) {
 			echo 'File saved in ' . $newPath;
