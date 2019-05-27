@@ -1,0 +1,310 @@
+//ch9_form.php
+<form action="<?php echo htmlentities($_SERVER['SCRIPT_NAME']) ?>" method="post">
+	<dl>
+		<dt>Your Name:</dt>
+		<?php if ( isset($errors["name"] ) ) { ?>
+		<dd class="error"><?php echo htmlentities( $errors["name"] ) ?></dd>
+		<?php } ?>
+		<dd><input type="text" name="name" value="<?php echo htmlentities( $defaults["name"] ) ?>"/></dd>
+		<dt>Are you over 18 years old?</dt>
+		<?php if ( isset( $errors["age"] ) ) { ?>
+		<dd class="error"><?php echo htmlentities( $errors["age"] ) ?></dd>
+		<?php } ?>
+		<dd><input type="checkbox" name="age" value="1" <?php echo $defaults["age"] ?>/> Yes</dd>
+		<dt>Your favorite ice cream flavor:</dt> <?php if ( isset( $errors["flavor"] ) ) { ?>
+		<dd class="error"><?php echo htmlentities( $errors["flavor"] ) ?></dd> <?php } ?>
+		<dd>
+			<select name="flavor">
+		<?php foreach ( $flavors as $flavor ) { ?>
+			<option <?php echo isset( $defaults["flavor"][$flavor] ) ? $defaults["flavor"][$flavor] : "" ?>><?= htmlentities( $flavor ) ?></option>
+		<?php } ?>
+			</select></dd>
+	</dl>
+	<input type="submit" value="Send Info"/>
+</form>
+
+//ch9_sg.php
+<?php
+session_start();
+if ( ( $_SERVER['REQUEST_METHOD'] == 'GET' ) || ( ! isset( $_POST['stage'] ) ) ) {
+	$stage = 1;
+} else {
+	$stage = (int) $_POST['stage'];
+}
+$stage = max( $stage, 1 );
+$stage = min( $stage, 3 );
+if ( $stage > 1 ) {
+	foreach ( $_POST as $key => $value ) {
+		$_SESSION[ $key ] = $value;
+	}
+}
+include __DIR__ . '/ch9_sg' . $stage . '.php';
+?>
+
+//ch9_sg1.php
+<form action="<?= htmlentities($_SERVER['SCRIPT_NAME']) ?>" method="post">
+	Name: <input type="text" name="name"/> <br/>
+	Age:  <input type="text" name="age"/> <br/>
+	<input type="hidden" name="stage" value="<?= $stage + 1 ?>"/>
+	<input type="submit" value="Next"/>
+</form>
+
+//ch9_sg2.php
+<form action="<?= htmlentities($_SERVER['SCRIPT_NAME']) ?>" method="post">
+	Favorite Color: <input type="text" name="color"/> <br/>
+	Favorite Food:  <input type="text" name="food"/> <br/>
+	<input type="hidden" name="stage" value="<?= $stage + 1 ?>"/>
+	<input type="submit" value="Done"/>
+</form>
+
+
+//ch9_t2.php
+<form method="POST" action="<?php echo htmlspecialchars( $_SERVER['PHP_SELF'] );?>">
+	Name: <input type="text" name="name"><br><br>
+	E-mail: <input type="text" name="email"><br><br>
+	age: <input type="text" name="age"><br><br>
+	Comment: <textarea name="comment" rows="5" cols="40"></textarea><br><br>
+	Gender:
+	<input type="radio" name="gender" value="female"> Female
+	<input type="radio" name="gender" value="male"> Male
+	<input type="radio" name="gender" value="other"> Other
+	<br><br>
+<?php
+	$choice = array(
+		'eggs' => 'Eggs Benedict',
+		'toast' => 'Buttered Toast with Jam',
+		'coffee' => 'Piping Hot Coffee'
+	);
+	echo '<select name="food">';
+	foreach ( $choice as $key => $choices ) {
+		echo '<option value = "$key">$choices</option>\n';
+	}
+	echo '</select><br><br>';
+	$menu = array(
+		'eggs' => 'fried egg',
+		'toast' => 'Buttered Toast with chololate',
+		'coffee' => 'Ice Mocha'
+	);
+	foreach ( $menu as $key => $values ) {
+		echo "<input type='checkbox' name='menu' value='$key'> $values \n";
+	}
+	echo '<br><br>';
+?>
+	Credit Card: <input type="text" name="card"><br><br>
+	<input type="submit" name="submit" value="Submit">
+</form>
+
+<?php
+/**
+ * Validating a credit card number
+ * @param string $s
+ * @return int $sum
+ */
+function is_valid_credit_card( $s ) {
+	$s = strrev(preg_replace( '/[^\d]/', '', $s ) );
+	$sum = 0;
+	for ( $i = 0, $j = strlen( $s ); $i < $j; $i++ ) {
+		if ( ( $i % 2 ) == 0 ) {
+			$val = $s[ $i ];
+		} else {
+			$val = $s[ $i ] * 2;
+			if( $val > 9 ){
+				$val -= 9;
+			}
+		}
+		$sum += $val;
+	}
+	return ( ( $sum % 10 ) == 0 );
+}
+if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
+	echo $_POST['name'] . '<br>';
+	echo $_POST['email'] . '<br>';
+	echo $_POST['age'] . '<br>';
+	echo $_POST['comment'] . '<br>';
+	if ( ! ( filter_has_var( INPUT_POST, 'name' ) && ( strlen ( filter_input(INPUT_POST, 'name' ) ) > 0 ) ) ) {
+		echo 'You must enter your name.<br>';
+	}
+	if ( filter_input ( INPUT_POST, 'email', FILTER_VALIDATE_EMAIL ) === false ) {
+		echo 'Submitted email address is invalid.';
+	}
+	if ( filter_input( INPUT_POST, 'age', FILTER_VALIDATE_INT ) === false ) {
+		echo 'Submitted age is invalid.<br>';
+	}
+	if ( filter_has_var( INPUT_POST, 'comment' ) && ( strlen( filter_input( INPUT_POST, 'comment', FILTER_SANITIZE_STRING ) ) <= 5 ) ) {
+		echo 'Comment must be more than 5 characters.<br>';
+	}
+	if (! array_key_exists( $_POST['food'], $choice ) ) {
+		echo 'You must select a valid choice.<br>';
+	}
+	if ( ! isset( $_POST['gender'] ) ) {
+		echo 'No radio buttons were checked.<br>'; 
+	}
+	if ( ! isset( $_POST['menu'] ) ) {
+		echo 'No checkboxes were checked.<br>'; 
+	}
+	if ( ! is_valid_credit_card( $_POST['card'] ) ) {
+		echo 'Sorry, that card number is invalid.';
+	}
+	echo '<br><br><br>';
+	echo 'The comment was: ';
+	echo htmlentities($_POST['comment']);
+}
+?>
+
+//ch9_t3.php
+<form method="POST" action="<?php echo htmlspecialchars( $_SERVER['PHP_SELF'] );?>">
+<?php 
+	$value = 'yes';
+	echo "<input type='checkbox' name='subscribe' value='yes'/> Subscribe?<br><br>";
+?>
+	<input type="submit" value="Submit">
+</form>
+
+<?php
+if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
+	if ( filter_has_var( INPUT_POST, 'subscribe' ) ) {
+			if ( $_POST['subscribe'] == $value ) {
+				$subscribed = true;
+			} else {
+				$subscribed = false;
+				print 'Invalid checkbox value submitted.';
+			}
+		} else {
+			$subscribed = false;
+		}
+	if ( $subscribed ) {
+		print 'You are subscribed.';
+	} else {
+		print 'You are not subscribed';
+	}
+}
+?>
+
+//ch9_t4.php
+<?php
+echo strtotime( 'now' ), '<br>';
+echo strtotime( '10 September 2000' ), '<br>';
+echo strtotime( '+1 day' ), '<br>';
+echo strtotime( '+1 week' ), '<br>';
+echo strtotime( '+1 week 2 days 4 hours 2 seconds' ), '<br>';
+echo strtotime( 'next Thursday' ), '<br>';
+echo strtotime( 'last Monday' ), '<br>';
+echo '<br><br>';
+if ( checkdate( 2, 29, 2020 ) ) {
+	echo 'True';
+} else {
+	echo 'False';
+}
+echo '<br>';
+var_dump( checkdate( 2, 29, 2026 ) );
+echo '<br><br>';
+$html = '<a href="fletch.html">Stews favorite movie.</a>\n';
+echo htmlspecialchars( $html );
+echo '<br><br>';
+echo htmlspecialchars( $html, ENT_QUOTES );
+echo '<br><br>';
+echo htmlspecialchars( $html, ENT_NOQUOTES );
+echo '<br><br>';
+echo __FILE__;
+echo '<br><br>';
+echo __DIR__;
+?>
+
+//ch9_t5.php
+<?php 
+if ( $_SERVER['REQUEST_METHOD'] == 'GET' ) { 
+?>
+<form method="post" action="<?php echo htmlentities($_SERVER['SCRIPT_NAME']) ?>" enctype="multipart/form-data"> 
+	<input type="file" name="document"/>
+	<input type="submit" value="Send File"/>
+</form>
+<?php
+} else {
+	if ( isset( $_FILES['doucment'] ) && ( $_FILES['document']['error'] == UPLOAD_ERR_OK ) ) {
+		$newPath = '/tmp/' . basename( $_FILES['doucment']['name'] );
+		if( move_uploaded_file( $_FILES['document']['tmp_name'], $newPath ) ) {
+			echo 'File saved in ' . $newPath;
+		} else {
+			echo 'Couldn\'t move file to ' . $newPath;
+		}
+	} else {
+		echo 'No valid file uploaded.';
+	}
+}
+
+//ch9_t6.php
+<?php
+$flavors = array( 'Vanilla','Chocolate','Rhinoceros' );
+$defaults = array(
+	'name' => '',
+	'age' => '',
+	'flavor' => array()
+);
+foreach ( $flavors as $flavor ) {
+	$defaults['flavor'][$flavor] = '';
+}
+if ( $_SERVER['REQUEST_METHOD'] == 'GET' ) {
+	$errors = array();
+	include __DIR__ . '/ch9_form.php';
+} else {
+	$errors = validate_form();
+	if ( count( $errors ) ) {
+		if ( isset( $_POST['name'] ) ) {
+			$defaults['name'] = $_POST['name'];
+		}
+		if ( isset( $_POST['age'] ) ) {
+			$defaults['age'] = 'checked="checked"';
+		}
+		foreach ( $flavors as $flavor ) {
+			if ( isset( $_POST['flavor'] ) && ( $_POST['flavor'] == $flavor ) ) {
+				$defaults['flavor'][$flavor] = 'selected="selected"';
+			}
+		}
+		include __DIR__ . '/ch9_form.php';
+	} else {
+		print 'The form is submitted!';
+	}
+}
+function validate_form() {
+	global $flavors;
+	$errors = array();
+	if ( ! (isset($_POST['name'] ) && ( strlen( $_POST['name'] ) > 3 ) ) ) {
+		$errors['name'] = 'Enter a name of at least 3 letters';
+	}
+	if ( isset( $_POST['age'] ) && ( $_POST['age'] != '1' ) ) {
+		$errors['age'] = 'Invalid age checkbox value.';
+	}
+	if ( isset( $_POST['flavor'] ) && ( ! in_array( $_POST['flavor'], $flavors ) ) ) {
+		$errors['flavor'] = 'Choose a valid flavor.';
+	}
+	return $errors;
+}
+?>
+
+//ch9_t7.php
+<form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
+    <input type="checkbox" name="boroughs[]" value="bronx"> The Bronx
+    <input type="checkbox" name="boroughs[]" value="brooklyn"> Brooklyn
+    <input type="checkbox" name="boroughs[]" value="manhattan"> Manhattan
+    <input type="checkbox" name="boroughs[]" value="queens"> Queens
+    <input type="checkbox" name="boroughs[]" value="statenisland"> Staten Island
+    <input type="submit" value="Submit">
+</form>
+<?php
+if ( $_SERVER['REQUEST_METHOD'] = 'POST' ) {
+	echo 'I love ' . join( ' and ', $_POST['boroughs'] ) . '!';
+}
+?>
+
+//ch9_t8.php
+<?php
+$options = array();
+$when = new DateTime();
+for ( $i = 0; $i < 10 ; ++$i ) {
+	$options[ $when->getTimestamp() ] = $when->format( 'D, F j, Y' );
+	$when->modify( '+1 day' );
+}
+foreach ( $options as $value => $label ) {
+	print '<option value="$value">$label</option>\n';
+}
+?>
