@@ -1,0 +1,147 @@
+//ch10-t1.php
+- Fix code standard of the try catch condition
+
+//ch10_t2.php
+line 11
+	$conn->exec( "INSERT INTO zodiac (id, sign, symbol, planet, element, start_month, start_day, end_month, end_day)
+	VALUES ( 1, 'Aries', 'Ram', 'Mars', 'fire', 3, 21, 4, 19 )" );
+	↓
+	$conn->exec( "INSERT INTO zodiac ( id, sign, symbol, planet, element, start_month, start_day, end_month, end_day ) VALUES ( 1, 'Aries', 'Ram', 'Mars', 'fire', 3, 21, 4, 19 )" );
+
+- Fix code standard of the try catch condition and other line also fix according to fixing above line
+
+//ch10-t3.php
+- Fix code standard of the try catch condition
+
+//ch10-t4.php
+line 7 to 9
+	while ( $row = $st->fetch(PDO::FETCH_NUM ) ) {
+	print implode( ',',$row ). '<br/>';
+	}
+	↓
+	while ( $row = $st->fetch( PDO::FETCH_NUM ) ) {
+		print implode( ',', $row ). '<br/>';
+	}
+
+line 11
+	- move tab
+
+//ch10_t5.php
+line 15
+	$values = ['Kim', 'Sohyung', 'kinsohyung@example.com'];
+	↓
+	$values = [ 'Kim', 'Sohyung', 'kinsohyung@example.com' ];
+
+- Fix code standard of the try catch condition
+
+//ch10_t6.php
+line 11
+	$st = $db->prepare( "UPDATE $table SET " . implode(',', $update_fields ) . "WHERE $key_field = ?" );
+	↓
+	$st = $db->prepare( "UPDATE $table SET " . implode( ',', $update_fields ) . "WHERE $key_field = ?" );
+
+line 19
+	$st = $db->prepare( "INSERT INTO $table ( $key_field," . implode( ',', $fields ) . ') VALUES ('. implode(',',$placeholders ) .')' );
+	↓
+	$st = $db->prepare( "INSERT INTO $table ( $key_field," . implode( ',', $fields ) . ') VALUES ('. implode( ',', $placeholders ) .')' );
+
+//ch10_t7.php
+line 20
+	$st = $conn->prepare( "SELECT " . implode(',', $fields ) . " FROM zodiac WHERE id = ?" );
+	↓
+	$st = $conn->prepare( "SELECT " . implode( ',', $fields ) . " FROM zodiac WHERE id = ?" );
+
+line 39 to 40
+	printf('<tr><td>%s: </td><td><input type="text" name="%s" value="%s">', $field, $field, $value );
+	printf('</td></tr>');
+	↓
+	printf( '<tr><td>%s: </td><td><input type="text" name="%s" value="%s">', $field, $field, $value );
+	printf( '</td></tr>' );
+
+line 49 to 50
+	} catch ( Exception $e ) {
+		print 'Couldnot add info: ' . htmlentities( $e->getMessage() ); }
+	↓
+	} catch ( Exception $e ) {
+		print 'Couldnot add info: ' . htmlentities( $e->getMessage() );
+	}
+
+line 57 
+	printf('<li> <a href="%s?cmd=edit&id=%s">%s</a>', $self, $row['id'], htmlentities( $row['sign'] ) );
+	↓	
+	printf( '<li><a href="%s?cmd=edit&id=%s">%s</a>', $self, $row['id'], htmlentities( $row['sign'] ) );
+
+
+//db_create.php
+- Fix code standard of the try catch condition
+
+//db_getLastID.php
+line 10 to 11
+	$sql = "INSERT INTO MyGuests (firstname, lastname, email)
+	VALUES ('Yoon', 'Saha', 'saha@example.com')";
+	↓
+	$sql = "INSERT INTO MyGuests ( firstname, lastname, email ) VALUES ( 'Yoon', 'Saha', 'saha@example.com' )";
+
+- Fix code standard of the try catch condition
+
+//db_insertData.php
+line 11 to 12
+	$conn->exec( "INSERT INTO MyGuests (firstname, lastname, email)
+	VALUES ('Moon', 'Bin', 'moonbin@example.com')" );
+	↓
+	$conn->exec( "INSERT INTO MyGuests ( firstname, lastname, email ) VALUES ( 'Moon', 'Bin', 'moonbin@example.com' )" );
+
+line 13 to 14 and line 15 to 16 -  will fix above code
+
+- Fix code standard of the try catch condition
+
+//db_prepared.php
+line 10 to 11
+	$stmt = $conn->prepare( "INSERT INTO MyGuests ( firstname, lastname, email ) 
+    VALUES ( :firstname, :lastname, :email )" );
+    ↓
+    $stmt = $conn->prepare( "INSERT INTO MyGuests ( firstname, lastname, email ) VALUES ( :firstname, :lastname, :email )" );
+
+line 11 to 25 - change space to tab in the front of this line
+
+- Fix code standard of the try catch condition
+
+//db_query.php
+line 9 
+	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	↓
+	$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+
+line 16
+	echo 'Retrieved : ' . count($results) . ' rows.<br>';
+	↓
+	echo 'Retrieved : ' . count( $results ) . ' rows.<br>';
+
+- Fix code standard of the try catch condition
+
+//db_selectData.php
+
+- Fix code standard of the try catch condition
+
+//db_tableCreate.php
+line 11 to 16
+	$sql = "CREATE TABLE testguest (
+	id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+	firstname VARCHAR(30) NOT NULL,
+	lastname VARCHAR(30) NOT NULL,
+	email VARCHAR(50),
+	reg_date TIMESTAMP
+	)";
+	↓
+	$sql = "CREATE TABLE testguest (
+		id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+		firstname VARCHAR(30) NOT NULL,
+		lastname VARCHAR(30) NOT NULL,
+		email VARCHAR(50),
+		reg_date TIMESTAMP
+	)";
+- Fix code standard of the try catch condition
+
+//db_updateData.php
+
+- Fix code standard of the try catch condition
