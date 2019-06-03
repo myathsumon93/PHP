@@ -12,13 +12,11 @@ try {
 	$values = array();
 	foreach ( $fields as $field ) {
 		$placeholder[] = '?';
-		$values = ['Kim', 'Sohyung', 'kinsohyung@example.com'];
+		$values = [ 'Kim', 'Sohyung', 'kinmsohyung@example.com' ];
 	}
 	$st = $conn->prepare( 'INSERT INTO myGuests (' . implode( ',', $fields ) . ') VALUES (' . implode( ',', $placeholder ) .')' );
 	$st->execute( $values );
-}
-catch ( PDOException $e )
-{
+} catch ( PDOException $e ) {
 	echo $e->getMessage();
 }
 $conn = null;

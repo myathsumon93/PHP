@@ -3,7 +3,6 @@ $servername = 'localhost';
 $username = 'root';
 $password = 'pwdpwd';
 $dbname = 'testing';
-
 try {
 	$conn = new PDO( "mysql:host=$servername;dbname=$dbname", $username, $password );
 	$conn->exec( "CREATE TABLE zodiac (
@@ -18,8 +17,7 @@ try {
 		end_day TINYINT,
 		PRIMARY KEY(id) )"
 	);
-}
-catch( PDOException $e )
+} catch ( PDOException $e )
 	{
 	$conn->rollback();
 	echo 'Error: ' . $e->getMessage();

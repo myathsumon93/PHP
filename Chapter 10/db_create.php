@@ -9,8 +9,7 @@ try {
 	$sql = "CREATE DATABASE MyDB";
 	$conn->exec( $sql );
 	echo 'Database created successfully<br>';
-}
-catch ( PDOException $e ) {
+} catch ( PDOException $e ) {
 	echo $sql . '<br>' . $e->getMessage();
 }
 $conn = null;

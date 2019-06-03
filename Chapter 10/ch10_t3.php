@@ -17,8 +17,7 @@ try {
 	}
 	$error = $conn->errorInfo();
 	print '<br>Problem: ' . $error[0];
-}
-catch ( PDOException $e ) {
+} catch ( PDOException $e ) {
 	$conn->rollback();
 	echo 'Error: ' . $e->getMessage();
 }
