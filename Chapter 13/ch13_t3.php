@@ -19,7 +19,7 @@ function pc_link_extractor( $htm ) {
 	$links = array();
 	preg_match_all( '/<a\s+.*?href=[\"\']?([^\"\' >]*)[\"\']?[^>]*>(.*?)<\/a>/i', $htm, $matches, PREG_SET_ORDER );
 	foreach ( $matches as $match ) {
-	$links[] = array( $match[1], $match[2] );
+		$links[] = array( $match[1], $match[2] );
 	}
 	return $links;
 }
