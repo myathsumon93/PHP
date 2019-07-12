@@ -1,0 +1,19 @@
+//ch11_t2.php
+if ( ! isset($_SESSION['generated']) || $_SESSION['generated'] < ( time() - 30 ) ) {
+↓
+if ( ! isset( $_SESSION['generated'] ) || $_SESSION['generated'] < ( time() - 30 ) ) {
+
+//ch11_t3.php
+			} 
+↓
+			}
+
+//ch11_t4.php
+        $_SESSION['visits'] = 0;
+    }
+↓
+		$_SESSION['visits'] = 0;
+	}
+
+
+// write comments for functions
