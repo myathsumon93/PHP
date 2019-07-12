@@ -11,8 +11,7 @@ class PageSaver {
 			$this->db = new PDO( 'mysql:host=$servername;dbname=$dbname', $username, $password );
 			$this->db->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 		}
-		catch ( PDOException $e )
-		{
+		catch ( PDOException $e ) {
 			echo $sql . '<br>' . $e->getMessage();
 		}
 	}
@@ -25,7 +24,7 @@ class PageSaver {
 		$st = $this->db->prepare( 'INSERT INTO save_page ' . '( url, page ) VALUES ( ?, ? )' );
 		$st->execute( array( $info[ 'url' ], $this->page ) );
 	}
-	}
+}
 $pageSaver = new PageSaver();
 $c = curl_init( 'http://www.google.com/ ');
 curl_setopt( $c, CURLOPT_WRITEFUNCTION, array( $pageSaver, 'write' ) );
