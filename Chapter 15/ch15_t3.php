@@ -1,5 +1,5 @@
 <?php
-$a = array( '<foo>',"'bar'",'"baz"','&blong&', "\xc3\xa9" );
+$a = array( '<foo>', "'bar'", '"baz"', '&blong&', "\xc3\xa9" );
 
 echo 'Normal: ', json_encode( $a ), '<br>';
 echo 'Tags: ', json_encode( $a, JSON_HEX_TAG ), '<br>';
@@ -13,7 +13,7 @@ $b = array();
 echo 'Empty array output as array: ', json_encode( $b ), '<br>';
 echo 'Empty array output as object: ', json_encode( $b, JSON_FORCE_OBJECT ), '<br>';
 
-$c = array( array( 1,2,3 ) );
+$c = array( array( 1, 2, 3 ) );
 
 echo 'Non-associative array output as array: ', json_encode( $c ), '<br>';
 echo 'Non-associative array output as object: ', json_encode( $c, JSON_FORCE_OBJECT ), '<br>';

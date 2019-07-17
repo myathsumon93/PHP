@@ -6,7 +6,7 @@ $job[123] = [
 	],
 ];
 $json = json_encode( $job[123] );
-http_response_code( 200 );
+http_response_code(200);
 header( 'Content-Type: application/json' );
 print $json;
 ?>

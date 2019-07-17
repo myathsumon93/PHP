@@ -1,5 +1,5 @@
 <?php
-http_response_code( 401 );
+http_response_code(401);
 $error_body = [
 	'error' => 'Unauthorized',
 	'code' => 1,
