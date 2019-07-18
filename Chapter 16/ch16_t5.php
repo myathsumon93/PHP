@@ -4,7 +4,7 @@ $ping = Net_Ping::factory();
 if ( $ping->checkHost( 'www.oreilly.com' ) ) {
 	print 'Reachable';
 } else {
-print 'Unreachable';
+	print 'Unreachable';
 }
 $data = $ping->ping( 'www.oreilly.com' );
 ?>
