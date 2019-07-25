@@ -13,7 +13,7 @@ list( $x ) = ImageStringCenter( $image, $text, $font );
 ImageString( $image, $font, $x, $y, $text, $color );
 ImageColorTransparent($image, ImageColorAllocateAlpha( $image, 0, 0, 0, 127 ) );
 ImageAlphaBlending( $image, false );
-ImageSaveAlpha($image, true);    
+ImageSaveAlpha($image, true);
 header( 'Content-type: image/png' );
 imagePng( $image );
 ImageDestroy( $image );
